@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم - Spherely</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #4267B2;
+      color: white;
+      padding: 20px 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .container {
+      margin: 20px auto;
+      max-width: 600px;
+      text-align: left;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .welcome-message {
+      font-size: 20px;
+      color: #333;
+    }
+    .logout-button {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #FF5733;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .logout-button:hover {
+      background-color: #D43F1A;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    لوحة التحكم - Spherely
+  </header>
+  <div class="container">
+    <h2>مرحبًا في لوحة التحكم</h2>
+    <div id="welcome-message" class="welcome-message"></div>
+    <button class="logout-button" id="logout-button">تسجيل الخروج</button>
+  </div>
+
+  <script type="module">
+    // التأكد من أن المستخدم قد قام بتسجيل الدخول
+    const loggedIn = sessionStorage.getItem('loggedIn');
+    const username = sessionStorage.getItem('username');
+
+    if (!loggedIn || loggedIn !== 'true') {
+      // إذا لم يكن المستخدم قد سجل الدخول، إعادة التوجيه إلى صفحة تسجيل الدخول
+      window.location.href = "Spherely.html";
+    } else {
+      // إذا كان المستخدم قد سجل الدخول، عرض رسالة ترحيب باسمه
+      document.getElementById('welcome-message').innerText = `مرحبًا، ${username}!`;
+    }
+
+    // إضافة وظيفة لتسجيل الخروج
+    document.getElementById('logout-button').addEventListener('click', () => {
+      // مسح البيانات من sessionStorage وتوجيه المستخدم إلى صفحة تسجيل الدخول
+      sessionStorage.removeItem('loggedIn');
+      sessionStorage.removeItem('username');
+      alert('تم تسجيل الخروج بنجاح!');
+      window.location.href = "Spherely.html";
+    });
+  </script>
+
+</body></html>
